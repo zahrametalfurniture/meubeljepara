@@ -534,6 +534,51 @@
     html {
       scroll-behavior: smooth;
     }
+
+    @media (max-width: 991.98px) {
+
+      /* Mengecilkan logo di HP */
+      .logo-img {
+        height: 45px !important;
+      }
+
+      /* Mengubah navigasi menjadi menu samping (Sidebar) */
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        /* Sembunyi di kanan luar layar */
+        width: 280px;
+        height: 100vh;
+        background: #0e0e0e;
+        /* Warna gelap mewah */
+        flex-direction: column;
+        padding: 80px 20px;
+        transition: 0.4s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+        display: flex !important;
+        /* Paksa muncul sebagai flex */
+      }
+
+      /* Munculkan menu saat tombol diklik */
+      .nav-links.open {
+        right: 0;
+      }
+
+      .nav-link-custom {
+        margin: 15px 0 !important;
+        font-size: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 10px;
+        width: 100%;
+      }
+
+      /* Tombol hamburger tetap di atas */
+      .hamburger {
+        z-index: 1001;
+      }
+    }
   </style>
 </head>
 
@@ -547,8 +592,7 @@
       </a>
 
       <button class="hamburger" onclick="toggleNav()" aria-label="Toggle Navigation">
-        <i class="bi bi-list"></i>
-      </button>
+        <i class="bi bi-list" id="hamIcon"></i> </button>
 
       <div class="nav-links d-lg-flex align-items-center" id="navLinks">
         <a href="index.html" class="nav-link-custom">Beranda</a>
@@ -846,9 +890,26 @@
 
     // Mobile Nav
     function toggleNav() {
-      document.getElementById('navLinks').classList.toggle('open');
+      const nav = document.getElementById('navLinks');
+      const icon = document.getElementById('hamIcon');
+
+      nav.classList.toggle('open');
+
+      // Logika ganti icon: Jika buka jadi 'X', jika tutup jadi 'Garis tiga'
+      if (nav.classList.contains('open')) {
+        icon.classList.replace('bi-list', 'bi-x-lg');
+      } else {
+        icon.classList.replace('bi-x-lg', 'bi-list');
+      }
     }
 
+    // Tambahan: Tutup menu otomatis kalau salah satu link diklik
+    document.querySelectorAll('.nav-link-custom').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
+        document.getElementById('hamIcon').classList.replace('bi-x-lg', 'bi-list');
+      });
+    });
     // ── INIT ──────────────────────────────────────────
     window.onload = () => {
       renderProducts();
