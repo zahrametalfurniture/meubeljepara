@@ -660,24 +660,38 @@
   </section>
 
   <!-- ══ MODAL DETAIL ═════════════════════════════════════ -->
+  <!-- ══ MODAL DETAIL DENGAN SLIDER FOTO ═════════════════════ -->
   <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body p-0">
           <div class="row g-0">
-            <div class="col-md-6">
-              <!-- Jalur file foto otomatis img/namafile.jpg -->
-              <img id="modalImg" src="" alt="" class="w-100 h-100" style="object-fit: cover; min-height: 400px;"
-                onerror="this.src='https://via.placeholder.com/600x800?text=Gambar+Tidak+Ditemukan'">
+            <div class="col-md-7 bg-dark d-flex align-items-center">
+              <!-- Bootstrap Carousel untuk Slide Foto -->
+              <div id="productCarousel" class="carousel slide w-100" data-bs-ride="carousel">
+                <div class="carousel-inner" id="carouselImages">
+                  <!-- Foto-foto akan dimasukkan secara dinamis via JS -->
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
             </div>
-            <div class="col-md-6 p-4 p-lg-5 d-flex flex-column">
+            <div class="col-md-5 p-4 p-lg-5 d-flex flex-column">
               <div class="d-flex justify-content-between align-items-start mb-3">
-                <h3 id="modalTitle" class="mb-0 fw-bold">Nama Produk</h3>
+                <h3 id="modalTitle" class="mb-0 fw-bold fs-4">Nama Produk</h3>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
+              <p id="modalPrice" class="price-tag fs-5 mb-3">Rp 0</p>
               <p id="modalDesc" class="text-muted small mb-4">Furnitur kualitas tinggi dari Zahra Metal Furniture.
-                Didesain dengan presisi menggunakan stainless steel pilihan.
-                Harga untuk rangka Silver, Kecuali ada keterangan Warna pada nama produk.</p>
+                Didesain dengan presisi menggunakan stainless steel pilihan.</p>
 
               <h6 class="text-uppercase small fw-bold mb-3 text-dark">Spesifikasi Detail:</h6>
               <ul class="spec-list mb-auto" id="modalSpecs">
@@ -723,137 +737,136 @@
 
     const products = [
       // === KATEGORI: KURSI ===
-      { name: "Kursi Keranjang", price: "Rp 1.500.000", img: "kursikeranjang-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan kaki Kerucut", price: "Rp 850.000", img: "kursikerucut-min.jpeg", category: "kursi", size: "Standar" },
-      { name: "Kursi Luna", price: "Rp 1000.000", img: "kursiluna-min.png", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan Sandaran Model Kipas", price: "Rp 950.000", img: "kursimakansandaranmodelkipas-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Mini Bar Type F", price: "Rp 800.000", img: "minibartypef-min.png", category: "kursi", size: "Bar Height" },
-      { name: "Kursi Makan Kaki Belakang Sate Bola", price: "Rp 500.000", img: "kursisate-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Mini Bar Type B", price: "Rp 1.500.000", img: "minibartypeb-min.jpg", category: "kursi", size: "Bar Height" },
-      { name: "Kursi Sangkar", price: "Rp 3.000.000", img: "kursisangkar-min.png", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan Cleopatra", price: "Rp 1.200.000", img: "kursicleopatra-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan Sandaran Oval", price: "Rp 1.250.000", img: "kursimakansandaranoval-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan Disa", price: "Rp 750.000", img: "kursimakansandaransetengahlingkarandisa-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan Cof", price: "Rp 550.000", img: "kursicof-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Makan R", price: "Rp 800.000", img: "kursir-min.jpg", category: "kursi", size: "Bar Height" },
-      { name: "Kursi Rias", price: "Rp 400.000", img: "kursirias-min.jpg", category: "kursi", size: "Standar" },
-      { name: "Kursi Bar Type B", price: "Rp 400.000", img: "bartypeb.jpg", category: "kursi", size: "Rangka Standar" },
-      { name: "Kursi Makan Buntung", price: "Rp 850.000", img: "kursibuntung.png", category: "kursi", size: "Rangka Standar" },
-      { name: "Kursi Makan Sleek", price: "Rp 1.100.000", img: "kursimakansleek.png", category: "kursi", size: "Rangka Standar" },
-      { name: "Kursi Makan Kotak", price: "Rp 850.000", img: "kursikotak.png", category: "kursi", size: "Rangka Standar" },
-      { name: "Sofa Putar Gold Single+Lengkap", price: "Rp 4.200.000", img: "sofaputar.png", category: "kursi", size: "Rangka Standar" },
-      { name: "Kursi Santai Mellow Rangka Silver", price: "Rp 2.000.000", img: "kursi_santai_mellow_silver.png", category: "kursi", size: "152,5 x 61 x 89H cm" },
+      { name: "Kursi Keranjang", price: "Rp 1.500.000", images: ["kursikeranjang-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan kaki Kerucut", price: "Rp 850.000", images: ["kursikerucut-min.jpeg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Luna", price: "Rp 1000.000", images: ["kursiluna-min.png"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan Sandaran Model Kipas", price: "Rp 950.000", images: ["kursimakansandaranmodelkipas-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Mini Bar Type F", price: "Rp 800.000", images: ["minibartypef-min.png"], category: "kursi", size: "Bar Height" },
+      { name: "Kursi Makan Kaki Belakang Sate Bola", price: "Rp 500.000", images: ["kursisate-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Mini Bar Type B", price: "Rp 1.500.000", images: ["minibartypeb-min.jpg"], category: "kursi", size: "Bar Height" },
+      { name: "Kursi Sangkar", price: "Rp 3.000.000", images: ["kursisangkar-min.png"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan Cleopatra", price: "Rp 1.200.000", images: ["kursicleopatra-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan Sandaran Oval", price: "Rp 1.250.000", images: ["kursimakansandaranoval-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan Disa", price: "Rp 750.000", images: ["kursimakansandaransetengahlingkarandisa-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan Cof", price: "Rp 550.000", images: ["kursicof-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Makan R", price: "Rp 800.000", images: ["kursir-min.jpg"], category: "kursi", size: "Bar Height" },
+      { name: "Kursi Rias", price: "Rp 400.000", images: ["kursirias-min.jpg"], category: "kursi", size: "Standar" },
+      { name: "Kursi Bar Type B", price: "Rp 400.000", images: ["bartypeb.jpg"], category: "kursi", size: "Rangka Standar" },
+      { name: "Kursi Makan Buntung", price: "Rp 850.000", images: ["kursibuntung.png"], category: "kursi", size: "Rangka Standar" },
+      { name: "Kursi Makan Sleek", price: "Rp 1.100.000", images: ["kursimakansleek.png"], category: "kursi", size: "Rangka Standar" },
+      { name: "Kursi Makan Kotak", price: "Rp 850.000", images: ["kursikotak.png"], category: "kursi", size: "Rangka Standar" },
+      { name: "Sofa Putar Gold Single+Lengkap", price: "Rp 4.200.000", images: ["sofaputar.png"], category: "kursi", size: "Rangka Standar" },
+      { name: "Kursi Santai Mellow Rangka Silver", price: "Rp 2.000.000", images: ["kursi_santai_mellow_silver.png"], category: "kursi", size: "152,5 x 61 x 89H cm" },
+
       // === KATEGORI: MEJA MAKAN ===
-      { name: "Meja Makan Custom Nordic Y Gold Top Marmer Carrara", price: "Rp 11.500.000", img: "mejamakany-min.png", category: "meja", size: "240x100x75" },
-      { name: "Meja Makan U Berbaris Silver Rangka Saja", price: "Rp 5.000.000", img: "mejamakanu-min.png", category: "meja", size: "Standar" },
-      { name: "Meja Makan Audy Lingkar 3 Gold Top Marmer Cream", price: "Rp 17.750.000", img: "mejamakanaudi3-min.png", category: "meja", size: "200x100x75" },
-      { name: "Meja Makan Audy 4 Lingkar Gold Top Marmer Carrara", price: "Rp 23.000.000", img: "mejamakanaudy4lingkar-min.png", category: "meja", size: "220x100" },
-      { name: "Meja Makan Banteng", price: "Rp 5.500.000", img: "mejamakanbanteng-min.jpg", category: "meja", size: "200x100" },
-      { name: "Meja Makan Celine Gold Top Marmer krem", price: "Rp 15.000.000", img: "mejamakanceline-min.jpg", category: "meja", size: "180x90x75" },
-      { name: "Meja Makan Cincin Gold Top Marmer Krem", price: "Rp 14.000.000", img: "mejamakancincin-min.png", category: "meja", size: "200x100" },
-      { name: "Meja Makan COC ", price: "Rp 6.000.000", img: "mejamakancoc-min.png", category: "meja", size: "200x100" },
-      { name: "Meja Makan Diamond Gold Top Marmer Cream", price: "Rp 13.800.000", img: "mejamakandiamond-min.png", category: "meja", size: "220x100x75" },
-      { name: "Meja Makan Donat", price: "Rp 6.000.000", img: "mejamakandonat-min.png", category: "meja", size: "220x110x70" },
-      { name: "Meja Makan Double Chain", price: "Rp 6.000.000", img: "mejamakan2chain-min.png", category: "meja", size: "210x110" },
-      { name: "Meja Makan Galaksi", price: "Rp 5.500.000", img: "mejamakangalaksi-min.png", category: "meja", size: "200x100" },
-      { name: "Meja Makan Belimbing Butterfly Gold Top Marmer Cream", price: "Rp 16.000.000", img: "mejamakanbelimbing-min.png", category: "meja", size: "220x110x75" },
-      { name: "Meja Makan Belimbing Butterfly Gold Top Marmer Cream", price: "Rp 16.000.000", img: "mejamakanbelimbing-min.png", category: "meja", size: "220x110x75" },
+      { name: "Meja Makan Custom Nordic Y Gold Top Marmer Carrara", price: "Rp 11.500.000", images: ["mejamakany-min.png"], category: "meja", size: "240x100x75" },
+      { name: "Meja Makan U Berbaris Silver Rangka Saja", price: "Rp 5.000.000", images: ["mejamakanu-min.png"], category: "meja", size: "Standar" },
+      { name: "Meja Makan Audy Lingkar 3 Gold Top Marmer Cream", price: "Rp 17.750.000", images: ["mejamakanaudi3-min.png"], category: "meja", size: "200x100x75" },
+      { name: "Meja Makan Audy 4 Lingkar Gold Top Marmer Carrara", price: "Rp 23.000.000", images: ["mejamakanaudy4lingkar-min.png"], category: "meja", size: "220x100" },
+      { name: "Meja Makan Banteng", price: "Rp 5.500.000", images: ["mejamakanbanteng-min.jpg"], category: "meja", size: "200x100" },
+      { name: "Meja Makan Celine Gold Top Marmer krem", price: "Rp 15.000.000", images: ["mejamakanceline-min.jpg"], category: "meja", size: "180x90x75" },
+      { name: "Meja Makan Cincin Gold Top Marmer Krem", price: "Rp 14.000.000", images: ["mejamakancincin-min.png"], category: "meja", size: "200x100" },
+      { name: "Meja Makan COC ", price: "Rp 6.000.000", images: ["mejamakancoc-min.png"], category: "meja", size: "200x100" },
+      { name: "Meja Makan Diamond Gold Top Marmer Cream", price: "Rp 13.800.000", images: ["mejamakandiamond-min.png"], category: "meja", size: "220x100x75" },
+      { name: "Meja Makan Donat", price: "Rp 6.000.000", images: ["mejamakandonat-min.png"], category: "meja", size: "220x110x70" },
+      { name: "Meja Makan Double Chain", price: "Rp 6.000.000", images: ["mejamakan2chain-min.png"], category: "meja", size: "210x110" },
+      { name: "Meja Makan Galaksi", price: "Rp 5.500.000", images: ["mejamakangalaksi-min.png"], category: "meja", size: "200x100" },
+      { name: "Meja Makan Belimbing Butterfly Gold Top Marmer Cream", price: "Rp 16.000.000", images: ["mejamakanbelimbing-min.png"], category: "meja", size: "220x110x75" },
 
       // === KATEGORI: Meja Console ===
-      { name: "Meja Console Bulan", price: "Rp 2.800.000", img: "consollbulan-min.jpg", category: "meja", size: "140x35x85" },
-      { name: "Meja Console 1000", price: "Rp 4.000.000", img: "consoll1000-min.jpg", category: "meja", size: "120x35x75" },
-      { name: "Meja Console Cincin", price: "Rp 2.300.000", img: "consollcincin-min.jpg", category: "meja", size: "120x40" },
-      { name: "Meja Console Model Cristal Diamond", price: "Rp 3.000.000", img: "consolldiamond-min.png", category: "meja", size: "100x35x80" },
-      { name: "Meja Console Padi Besar", price: "Rp 3.200.000", img: "consollpadi-min.png", category: "meja", size: "150x45x90" },
-      { name: "Meja Console Padi Kecil", price: "Rp 2.300.000", img: "consollpadi-min.png", category: "meja", size: "100x35x80" },
-      { name: "Meja Console Padi Sedang", price: "Rp 2.600.000", img: "consollpadi-min.png", category: "meja", size: "125x30" },
-      { name: "Meja Console Rumput", price: "Rp 2.600.000", img: "consollrumput-min.png", category: "meja", size: "100x35x75" },
-      { name: "Meja Console Sarang Lebah", price: "Rp 3.500.000", img: "consollsaranglebah-min.png", category: "meja", size: "120x40x80" },
-      { name: "Meja Console Setengah Lingkar Berbaris", price: "Rp 2.000.000", img: "consollsetengahlingkarberbaris-min.png", category: "meja", size: "118x38x78" },
-      { name: "Meja Console Linear", price: "Rp 1.400.000", img: "consolllinear-min.jpg", category: "meja", size: "150x30x88" },
-      { name: "Meja Console Table Setengah Bulan Orbit", price: "Rp 1.400.000", img: "consolltablesetengahbulanorbit-min.png", category: "meja", size: "130x40x80" },
-      { name: "Meja Console Angka 8", price: "Rp 3.300.000", img: "consoll8-min.png", category: "meja", size: "180x40x72" },
-      { name: "Meja Console Audy", price: "Rp 4.000.000", img: "consollaudy-min.png", category: "meja", size: "140x40x75" },
+      { name: "Meja Console Bulan", price: "Rp 2.800.000", images: ["consollbulan-min.jpg"], category: "meja", size: "140x35x85" },
+      { name: "Meja Console 1000", price: "Rp 4.000.000", images: ["consoll1000-min.jpg"], category: "meja", size: "120x35x75" },
+      { name: "Meja Console Cincin", price: "Rp 2.300.000", images: ["consollcincin-min.jpg"], category: "meja", size: "120x40" },
+      { name: "Meja Console Model Cristal Diamond", price: "Rp 3.000.000", images: ["consolldiamond-min.png"], category: "meja", size: "100x35x80" },
+      { name: "Meja Console Padi Besar", price: "Rp 3.200.000", images: ["consollpadi-min.png"], category: "meja", size: "150x45x90" },
+      { name: "Meja Console Padi Kecil", price: "Rp 2.300.000", images: ["consollpadi-min.png"], category: "meja", size: "100x35x80" },
+      { name: "Meja Console Padi Sedang", price: "Rp 2.600.000", images: ["consollpadi-min.png"], category: "meja", size: "125x30" },
+      { name: "Meja Console Rumput", price: "Rp 2.600.000", images: ["consollrumput-min.png"], category: "meja", size: "100x35x75" },
+      { name: "Meja Console Sarang Lebah", price: "Rp 3.500.000", images: ["consollsaranglebah-min.png"], category: "meja", size: "120x40x80" },
+      { name: "Meja Console Setengah Lingkar Berbaris", price: "Rp 2.000.000", images: ["consollsetengahlingkarberbaris-min.png"], category: "meja", size: "118x38x78" },
+      { name: "Meja Console Linear", price: "Rp 1.400.000", images: ["consolllinear-min.jpg"], category: "meja", size: "150x30x88" },
+      { name: "Meja Console Table Setengah Bulan Orbit", price: "Rp 1.400.000", images: ["consolltablesetengahbulanorbit-min.png"], category: "meja", size: "130x40x80" },
+      { name: "Meja Console Angka 8", price: "Rp 3.300.000", images: ["consoll8-min.png"], category: "meja", size: "180x40x72" },
+      { name: "Meja Console Audy", price: "Rp 4.000.000", images: ["consollaudy-min.png", "consoll8-min.png"], category: "meja", size: "140x40x75" },
 
       // === KATEGORI: SIDE TABLE / MEJA TAMU ===
-      { name: "Nakas Side Table Kaki Susun Lingkaran", price: "Rp 750.000", img: "nakassidetablekakisusunlingkaran-min.png", category: "meja", size: "35x35" },
-      { name: "Side Table Stalaktik Tundan", price: "Rp 1.000.000", img: "sidetablestalaktiktundan-min.png", category: "meja", size: "38x53" },
-      { name: "Side Table Alas X Medium", price: "Rp 500.000", img: "sidetablealasx-min.png", category: "meja", size: "40x48" },
-      { name: "Side Table Alas X Small", price: "Rp 450.000", img: "sidetablealasx-min.png", category: "meja", size: "35x35" },
-      { name: "Side Table Flow", price: "Rp 1.500.000", img: "sidetableflow-min.png", category: "meja", size: "60x60x60" },
-      { name: "Side Table Geometris", price: "Rp 900.000", img: "sidetablegeometris-min.png", category: "meja", size: "Standar" },
-      { name: "Side Table Hongkong", price: "Rp 850.000", img: "sidetablehongkong-min.png", category: "meja", size: "35x35x60" },
-      { name: "Side Table Jam Pasir", price: "Rp 800.000", img: "sidetablepasir-min.jpg", category: "meja", size: "Standar" },
-      { name: "Side Table Jari Berputar", price: "Rp 900.000", img: "sidetablejariberputar-min.png", category: "meja", size: "47,5x58" },
-      { name: "Side Table Kacang", price: "Rp 1.200.000", img: "sidetablekacang-min.png", category: "meja", size: "50x55" },
-      { name: "Side Table Kaki Setengah Silinder", price: "Rp 900.000", img: "sidetablekakisetengahsilinder-min.png", category: "meja", size: "50x50" },
-      { name: "Side Table Spiral", price: "Rp 900.000", img: "sidetablespiral-min.png", category: "meja", size: "49x54" },
-      { name: "Side Table Lingkar", price: "Rp 600.000", img: "sidetablelingkar-min.png", category: "meja", size: "50x72" },
-      { name: "Side Table Lingkar Aurora Ring", price: "Rp 1.400.000", img: "sidetableaurora-min.png", category: "meja", size: "80x60" },
-      { name: "Side Table Ulir", price: "Rp 1.100.000", img: "sidetableulir-min.png", category: "meja", size: "48x53" },
-      { name: "Side Table Kupu-Kupu Rangka Silver", price: "Rp 1.700.000", img: "sidetablekupu.png", category: "meja", size: "45×45×55" },
-      { name: "Side Table Bite Rangka Silver", price: "Rp 900.000", img: "sidetable_apple.png", category: "meja", size: "D 40 T 60 cm" },
-      { name: "Meja Nakas Rangka Saja Silver", price: "Rp 1.800.000", img: "meja_nakas_rangka_silver.png", category: "meja", size: "65 x 120 cm" },
-      { name: "Side Table Round Rangka Silver", price: "Rp 900.000", img: "side_table_round_silver.png", category: "meja", size: "D 50 cm" },
-      { name: "Coffee Table Rangka Silver", price: "Rp 2.800.000", img: "coffee_table_rangka_silver.png", category: "meja", size: "D 60 & 40 T 50 & 40 cm" },
-      { name: "Coffee Table Ball Rangka Silver", price: "Rp 3.500.000", img: "coffee_table_ball_rangka_silver.png", category: "meja", size: "D 100 T 35 cm" },
-      { name: "Coffee Table CNC Rangka Silver", price: "Rp 2.200.000", img: "coffee_table_cnc_rangka_silver.png", category: "meja", size: "118 x 58 x 43 cm" },
-      { name: "Coffee Table CT6 Rangka Silver", price: "Rp 3.400.000", img: "coffee_table_ct6_rangka_silver.png", category: "meja", size: "97 x 35 cm" },
-      { name: "Coffee Table Double Ball Rangka Silver", price: "Rp 1.500.000", img: "coffee_table_double_ball_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Kacang Rangka Silver", price: "Rp 3.100.000", img: "coffee_table_kacang_rangka_silver.png", category: "meja", size: "120 x 60 x 45 cm" },
-      { name: "Coffee Table Kacang Custom Set Rangka Silver", price: "Rp 3.000.000", img: "coffee_table_kacang_custom_set_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Kaki Jari Holo Rangka Silver", price: "Rp 1.800.000", img: "coffee_table_kaki_jari_holo_rangka_silver.png", category: "meja", size: "1 x 1" },
-      { name: "Coffee Table Kaki Plat CNC Diora Rangka Silver", price: "Rp 2.500.000", img: "coffee_table_kaki_plat_cnc_diora_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Lingkar Aurora Ring Rangka Silver", price: "Rp 1.800.000", img: "coffee_table_lingkar_aurora_ring_rangka_silver.png", category: "meja", size: "D 100 T 50 cm" },
-      { name: "Coffee Table Lingkar Aurelia Rangka Silver", price: "Rp 1.300.000", img: "coffee_table_lingkar_aurelia_rangka_silver.png", category: "meja", size: "70 x 45 cm" },
-      { name: "Coffee Table Lingkaran Tumpuk Rangka Silver", price: "Rp 2.500.000", img: "coffee_table_lingkaran_tumpuk_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Living Room Lunar Rangka Silver", price: "Rp 4.000.000", img: "coffee_table_living_room_lunar_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Nero Gareng Classic Line Rangka Silver", price: "Rp 1.750.000", img: "coffee_table_nero_gareng_classic_line_rangka_silver.png", category: "meja", size: "150 x 60 x 50 cm" },
-      { name: "Coffee Table Orion Rangka Silver", price: "Rp 850.000", img: "coffee_table_orion_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Pipa Bola Rangka Silver", price: "Rp 1.200.000", img: "coffee_table_pipa_bola_rangka_silver.png", category: "meja", size: "D 50 T 65 cm" },
-      { name: "Coffee Table Rantai Rangka Silver", price: "Rp 3.500.000", img: "coffee_table_rantai_rangka_silver.png", category: "meja", size: "110 x 50 x 43 cm" },
-      { name: "Coffee Table Set Rangka Silver", price: "Rp 1.500.000", img: "coffee_table_set_rangka_silver.png", category: "meja", size: "D 60 D 45 cm" },
-      { name: "Coffee Table Sisik Ikan Rangka Silver", price: "Rp 3.500.000", img: "coffee_table_sisik_ikan_rangka_silver.png", category: "meja", size: "Diameter 100 cm" },
-      { name: "Coffee Table Top Telur Rangka Silver", price: "Rp 2.000.000", img: "coffee_table_top_telur_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Coffee Table Wave and Ball Rangka Silver", price: "Rp 2.500.000", img: "coffee_table_wave_and_ball_rangka_silver.png", category: "meja", size: "120 x 60 x 43 cm" },
-      { name: "Kaki Meja Tamu Kotak Rangka Silver", price: "Rp 1.500.000", img: "kaki_meja_tamu_kotak_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Kaki Meja Tamu Model Y Rangka Silver", price: "Rp 1.200.000", img: "kaki_meja_tamu_model_y_rangka_silver.png", category: "meja", size: "160 x 50 x 50 cm" },
-      { name: "Kaki Meja Tamu Nakas Lengkung Rangka Silver", price: "Rp 650.000", img: "kaki_meja_tamu_nakas_lengkung_rangka_silver.png", category: "meja", size: "L 70 T 20 cm" },
-      { name: "Meja Tamu Asymmetra Rangka Silver", price: "Rp 1.200.000", img: "meja_tamu_asymmetra_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Awan Rangka Silver", price: "Rp 3.500.000", img: "meja_tamu_awan_rangka_silver.png", category: "meja", size: "120 x 60 x 43 cm" },
-      { name: "Meja Tamu Cincin Rangka Silver", price: "Rp 2.300.000", img: "meja_tamu_cincin_rangka_silver.png", category: "meja", size: "160 x 70 x 50 cm" },
-      { name: "Meja Tamu Cincin Rangka Saja Silver", price: "Rp 1.700.000", img: "meja_tamu_cincin_rangka_saja_silver.png", category: "meja", size: "75 x 45 cm" },
-      { name: "Meja Tamu Cincin Rangka Silver", price: "Rp 2.350.000", img: "meja_tamu_cincin_150x100_rangka_silver.png", category: "meja", size: "150 x 100 cm" },
-      { name: "Meja Tamu Diamond Rangka Silver", price: "Rp 2.000.000", img: "meja_tamu_diamond_rangka_silver.png", category: "meja", size: "120 x 60 cm" },
-      { name: "Meja Tamu Flow Rangka Silver", price: "Rp 3.000.000", img: "meja_tamu_flow_rangka_silver.png", category: "meja", size: "165 x 70 x 50 cm" },
-      { name: "Meja Tamu Galaksi Rangka Silver", price: "Rp 1.800.000", img: "meja_tamu_galaksi_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Kaki Bawah X (Crossed Loop) Rangka Silver", price: "Rp 2.000.000", img: "meja_tamu_crossed_loop_rangka_silver.png", category: "meja", size: "115 x 55 cm" },
-      { name: "Meja Tamu Kaki Butterfly Rangka Silver", price: "Rp 4.000.000", img: "meja_tamu_butterfly_rangka_silver.png", category: "meja", size: "160 x 80 cm" },
-      { name: "Meja Tamu Kaki Kotak Top Oval Elip Rangka Silver", price: "Rp 900.000", img: "meja_tamu_kaki_kotak_top_oval_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Kaki Setengah Silinder Rangka Silver", price: "Rp 1.400.000", img: "meja_tamu_setengah_silinder_rangka_silver.png", category: "meja", size: "D 80 T 40 cm" },
-      { name: "Meja Tamu Kaki Silang Rangka Silver", price: "Rp 6.500.000", img: "meja_tamu_kaki_silang_rangka_silver.png", category: "meja", size: "298 x 118 x 48 cm" },
-      { name: "Meja Tamu Kotak Besi Rangka Silver", price: "Rp 425.000", img: "meja_tamu_kotak_besi_rangka_silver.png", category: "meja", size: "100 x 55 cm" },
-      { name: "Meja Tamu Lingkaran Besi Rangka Silver", price: "Rp 400.000", img: "meja_tamu_lingkaran_besi_rangka_silver.png", category: "meja", size: "Diameter 80 cm" },
-      { name: "Meja Tamu Nesting Rangka Silver", price: "Rp 1.100.000", img: "meja_tamu_nesting_rangka_silver.png", category: "meja", size: "Dia 70 / 50 cm" },
-      { name: "Meja Tamu Piramida Rangka Silver", price: "Rp 1.750.000", img: "meja_tamu_piramida_rangka_silver.png", category: "meja", size: "100 x 50 x 45 cm" },
-      { name: "Meja Tamu Silang Pipa Rangka Silver", price: "Rp 2.700.000", img: "meja_tamu_silang_pipa_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Top Oval Lonjong Rangka Silver", price: "Rp 1.000.000", img: "meja_tamu_top_oval_lonjong_rangka_silver.png", category: "meja", size: "150 x 70 x 43 cm" },
-      { name: "Meja Tamu W Rangka Silver", price: "Rp 1.800.000", img: "meja_tamu_w_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Wine Rangka Silver", price: "Rp 2.200.000", img: "meja_tamu_wine_120_rangka_silver.png", category: "meja", size: "120 x 60 x 46 cm" },
-      { name: "Meja Tamu Wine Rangka Silver", price: "Rp 2.600.000", img: "meja_tamu_wine_150_rangka_silver.png", category: "meja", size: "150 x 70 x 50 cm" },
-      { name: "Meja Tamu X Rangka Silver", price: "Rp 2.800.000", img: "meja_tamu_x_rangka_silver.png", category: "meja", size: "120 x 60 cm" },
-      { name: "Meja Tamu X Infinity Rangka Silver", price: "Rp 3.500.000", img: "meja_tamu_x_infinity_rangka_silver.png", category: "meja", size: "-" },
-      { name: "Meja Tamu Kaki Ring Lengkung Rangka Silver", price: "Rp 2.000.000", img: "meja_tamu_ring_lengkung_130_rangka_silver.png", category: "meja", size: "130 x 70 x 45 cm" },
-      { name: "Meja Tamu Kaki Ring Lengkung Rangka Silver", price: "Rp 2.200.000", img: "meja_tamu_ring_lengkung_140_rangka_silver.png", category: "meja", size: "140 x 80 x 45 cm" },
+      { name: "Nakas Side Table Kaki Susun Lingkaran", price: "Rp 750.000", images: ["nakassidetablekakisusunlingkaran-min.png"], category: "meja", size: "35x35" },
+      { name: "Side Table Stalaktik Tundan", price: "Rp 1.000.000", images: ["sidetablestalaktiktundan-min.png"], category: "meja", size: "38x53" },
+      { name: "Side Table Alas X Medium", price: "Rp 500.000", images: ["sidetablealasx-min.png"], category: "meja", size: "40x48" },
+      { name: "Side Table Alas X Small", price: "Rp 450.000", images: ["sidetablealasx-min.png"], category: "meja", size: "35x35" },
+      { name: "Side Table Flow", price: "Rp 1.500.000", images: ["sidetableflow-min.png"], category: "meja", size: "60x60x60" },
+      { name: "Side Table Geometris", price: "Rp 900.000", images: ["sidetablegeometris-min.png"], category: "meja", size: "Standar" },
+      { name: "Side Table Hongkong", price: "Rp 850.000", images: ["sidetablehongkong-min.png"], category: "meja", size: "35x35x60" },
+      { name: "Side Table Jam Pasir", price: "Rp 800.000", images: ["sidetablepasir-min.jpg"], category: "meja", size: "Standar" },
+      { name: "Side Table Jari Berputar", price: "Rp 900.000", images: ["sidetablejariberputar-min.png"], category: "meja", size: "47,5x58" },
+      { name: "Side Table Kacang", price: "Rp 1.200.000", images: ["sidetablekacang-min.png"], category: "meja", size: "50x55" },
+      { name: "Side Table Kaki Setengah Silinder", price: "Rp 900.000", images: ["sidetablekakisetengahsilinder-min.png"], category: "meja", size: "50x50" },
+      { name: "Side Table Spiral", price: "Rp 900.000", images: ["sidetablespiral-min.png"], category: "meja", size: "49x54" },
+      { name: "Side Table Lingkar", price: "Rp 600.000", images: ["sidetablelingkar-min.png"], category: "meja", size: "50x72" },
+      { name: "Side Table Lingkar Aurora Ring", price: "Rp 1.400.000", images: ["sidetableaurora-min.png"], category: "meja", size: "80x60" },
+      { name: "Side Table Ulir", price: "Rp 1.100.000", images: ["sidetableulir-min.png"], category: "meja", size: "48x53" },
+      { name: "Side Table Kupu-Kupu Rangka Silver", price: "Rp 1.700.000", images: ["sidetablekupu.png"], category: "meja", size: "45×45×55" },
+      { name: "Side Table Bite Rangka Silver", price: "Rp 900.000", images: ["sidetable_apple.png"], category: "meja", size: "D 40 T 60 cm" },
+      { name: "Meja Nakas Rangka Saja Silver", price: "Rp 1.800.000", images: ["meja_nakas_rangka_silver.png"], category: "meja", size: "65 x 120 cm" },
+      { name: "Side Table Round Rangka Silver", price: "Rp 900.000", images: ["side_table_round_silver.png"], category: "meja", size: "D 50 cm" },
+      { name: "Coffee Table Rangka Silver", price: "Rp 2.800.000", images: ["coffee_table_rangka_silver.png"], category: "meja", size: "D 60 & 40 T 50 & 40 cm" },
+      { name: "Coffee Table Ball Rangka Silver", price: "Rp 3.500.000", images: ["coffee_table_ball_rangka_silver.png"], category: "meja", size: "D 100 T 35 cm" },
+      { name: "Coffee Table CNC Rangka Silver", price: "Rp 2.200.000", images: ["coffee_table_cnc_rangka_silver.png"], category: "meja", size: "118 x 58 x 43 cm" },
+      { name: "Coffee Table CT6 Rangka Silver", price: "Rp 3.400.000", images: ["coffee_table_ct6_rangka_silver.png"], category: "meja", size: "97 x 35 cm" },
+      { name: "Coffee Table Double Ball Rangka Silver", price: "Rp 1.500.000", images: ["coffee_table_double_ball_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Kacang Rangka Silver", price: "Rp 3.100.000", images: ["coffee_table_kacang_rangka_silver.png"], category: "meja", size: "120 x 60 x 45 cm" },
+      { name: "Coffee Table Kacang Custom Set Rangka Silver", price: "Rp 3.000.000", images: ["coffee_table_kacang_custom_set_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Kaki Jari Holo Rangka Silver", price: "Rp 1.800.000", images: ["coffee_table_kaki_jari_holo_rangka_silver.png"], category: "meja", size: "1 x 1" },
+      { name: "Coffee Table Kaki Plat CNC Diora Rangka Silver", price: "Rp 2.500.000", images: ["coffee_table_kaki_plat_cnc_diora_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Lingkar Aurora Ring Rangka Silver", price: "Rp 1.800.000", images: ["coffee_table_lingkar_aurora_ring_rangka_silver.png"], category: "meja", size: "D 100 T 50 cm" },
+      { name: "Coffee Table Lingkar Aurelia Rangka Silver", price: "Rp 1.300.000", images: ["coffee_table_lingkar_aurelia_rangka_silver.png"], category: "meja", size: "70 x 45 cm" },
+      { name: "Coffee Table Lingkaran Tumpuk Rangka Silver", price: "Rp 2.500.000", images: ["coffee_table_lingkaran_tumpuk_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Living Room Lunar Rangka Silver", price: "Rp 4.000.000", images: ["coffee_table_living_room_lunar_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Nero Gareng Classic Line Rangka Silver", price: "Rp 1.750.000", images: ["coffee_table_nero_gareng_classic_line_rangka_silver.png"], category: "meja", size: "150 x 60 x 50 cm" },
+      { name: "Coffee Table Orion Rangka Silver", price: "Rp 850.000", images: ["coffee_table_orion_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Pipa Bola Rangka Silver", price: "Rp 1.200.000", images: ["coffee_table_pipa_bola_rangka_silver.png"], category: "meja", size: "D 50 T 65 cm" },
+      { name: "Coffee Table Rantai Rangka Silver", price: "Rp 3.500.000", images: ["coffee_table_rantai_rangka_silver.png"], category: "meja", size: "110 x 50 x 43 cm" },
+      { name: "Coffee Table Set Rangka Silver", price: "Rp 1.500.000", images: ["coffee_table_set_rangka_silver.png"], category: "meja", size: "D 60 D 45 cm" },
+      { name: "Coffee Table Sisik Ikan Rangka Silver", price: "Rp 3.500.000", images: ["coffee_table_sisik_ikan_rangka_silver.png"], category: "meja", size: "Diameter 100 cm" },
+      { name: "Coffee Table Top Telur Rangka Silver", price: "Rp 2.000.000", images: ["coffee_table_top_telur_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Coffee Table Wave and Ball Rangka Silver", price: "Rp 2.500.000", images: ["coffee_table_wave_and_ball_rangka_silver.png"], category: "meja", size: "120 x 60 x 43 cm" },
+      { name: "Kaki Meja Tamu Kotak Rangka Silver", price: "Rp 1.500.000", images: ["kaki_meja_tamu_kotak_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Kaki Meja Tamu Model Y Rangka Silver", price: "Rp 1.200.000", images: ["kaki_meja_tamu_model_y_rangka_silver.png"], category: "meja", size: "160 x 50 x 50 cm" },
+      { name: "Kaki Meja Tamu Nakas Lengkung Rangka Silver", price: "Rp 650.000", images: ["kaki_meja_tamu_nakas_lengkung_rangka_silver.png"], category: "meja", size: "L 70 T 20 cm" },
+      { name: "Meja Tamu Asymmetra Rangka Silver", price: "Rp 1.200.000", images: ["meja_tamu_asymmetra_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Awan Rangka Silver", price: "Rp 3.500.000", images: ["meja_tamu_awan_rangka_silver.png"], category: "meja", size: "120 x 60 x 43 cm" },
+      { name: "Meja Tamu Cincin Rangka Silver", price: "Rp 2.300.000", images: ["meja_tamu_cincin_rangka_silver.png"], category: "meja", size: "160 x 70 x 50 cm" },
+      { name: "Meja Tamu Cincin Rangka Saja Silver", price: "Rp 1.700.000", images: ["meja_tamu_cincin_rangka_saja_silver.png"], category: "meja", size: "75 x 45 cm" },
+      { name: "Meja Tamu Cincin Rangka Silver", price: "Rp 2.350.000", images: ["meja_tamu_cincin_150x100_rangka_silver.png"], category: "meja", size: "150 x 100 cm" },
+      { name: "Meja Tamu Diamond Rangka Silver", price: "Rp 2.000.000", images: ["meja_tamu_diamond_rangka_silver.png"], category: "meja", size: "120 x 60 cm" },
+      { name: "Meja Tamu Flow Rangka Silver", price: "Rp 3.000.000", images: ["meja_tamu_flow_rangka_silver.png"], category: "meja", size: "165 x 70 x 50 cm" },
+      { name: "Meja Tamu Galaksi Rangka Silver", price: "Rp 1.800.000", images: ["meja_tamu_galaksi_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Kaki Bawah X (Crossed Loop) Rangka Silver", price: "Rp 2.000.000", images: ["meja_tamu_crossed_loop_rangka_silver.png"], category: "meja", size: "115 x 55 cm" },
+      { name: "Meja Tamu Kaki Butterfly Rangka Silver", price: "Rp 4.000.000", images: ["meja_tamu_butterfly_rangka_silver.png"], category: "meja", size: "160 x 80 cm" },
+      { name: "Meja Tamu Kaki Kotak Top Oval Elip Rangka Silver", price: "Rp 900.000", images: ["meja_tamu_kaki_kotak_top_oval_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Kaki Setengah Silinder Rangka Silver", price: "Rp 1.400.000", images: ["meja_tamu_setengah_silinder_rangka_silver.png"], category: "meja", size: "D 80 T 40 cm" },
+      { name: "Meja Tamu Kaki Silang Rangka Silver", price: "Rp 6.500.000", images: ["meja_tamu_kaki_silang_rangka_silver.png"], category: "meja", size: "298 x 118 x 48 cm" },
+      { name: "Meja Tamu Kotak Besi Rangka Silver", price: "Rp 425.000", images: ["meja_tamu_kotak_besi_rangka_silver.png"], category: "meja", size: "100 x 55 cm" },
+      { name: "Meja Tamu Lingkaran Besi Rangka Silver", price: "Rp 400.000", images: ["meja_tamu_lingkaran_besi_rangka_silver.png"], category: "meja", size: "Diameter 80 cm" },
+      { name: "Meja Tamu Nesting Rangka Silver", price: "Rp 1.100.000", images: ["meja_tamu_nesting_rangka_silver.png"], category: "meja", size: "Dia 70 / 50 cm" },
+      { name: "Meja Tamu Piramida Rangka Silver", price: "Rp 1.750.000", images: ["meja_tamu_piramida_rangka_silver.png"], category: "meja", size: "100 x 50 x 45 cm" },
+      { name: "Meja Tamu Silang Pipa Rangka Silver", price: "Rp 2.700.000", images: ["meja_tamu_silang_pipa_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Top Oval Lonjong Rangka Silver", price: "Rp 1.000.000", images: ["meja_tamu_top_oval_lonjong_rangka_silver.png"], category: "meja", size: "150 x 70 x 43 cm" },
+      { name: "Meja Tamu W Rangka Silver", price: "Rp 1.800.000", images: ["meja_tamu_w_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Wine Rangka Silver", price: "Rp 2.200.000", images: ["meja_tamu_wine_120_rangka_silver.png"], category: "meja", size: "120 x 60 x 46 cm" },
+      { name: "Meja Tamu Wine Rangka Silver", price: "Rp 2.600.000", images: ["meja_tamu_wine_150_rangka_silver.png"], category: "meja", size: "150 x 70 x 50 cm" },
+      { name: "Meja Tamu X Rangka Silver", price: "Rp 2.800.000", images: ["meja_tamu_x_rangka_silver.png"], category: "meja", size: "120 x 60 cm" },
+      { name: "Meja Tamu X Infinity Rangka Silver", price: "Rp 3.500.000", images: ["meja_tamu_x_infinity_rangka_silver.png"], category: "meja", size: "-" },
+      { name: "Meja Tamu Kaki Ring Lengkung Rangka Silver", price: "Rp 2.000.000", images: ["meja_tamu_ring_lengkung_130_rangka_silver.png"], category: "meja", size: "130 x 70 x 45 cm" },
+      { name: "Meja Tamu Kaki Ring Lengkung Rangka Silver", price: "Rp 2.200.000", images: ["meja_tamu_ring_lengkung_140_rangka_silver.png"], category: "meja", size: "140 x 80 x 45 cm" },
 
       // === KATEGORI: LAIN-LAIN ===
-      { name: "Rak Alat Sholat Mushola Rumah", price: "Rp 900.000", img: "sidetable_apple.png", category: "lain-lain", size: "D 40 T 60 cm" },
+      { name: "Rak Alat Sholat Mushola Rumah", price: "Rp 900.000", images: ["sidetable_apple.png"], category: "lain-lain", size: "D 40 T 60 cm" },
+
       // === KATEGORI: TERLARIS ===
-      { name: "Meja Console 1000", price: "Rp 4.000.000", img: "consoll1000-min.jpg", category: "Terlaris", size: "120x35x75" },
-      { name: "Custom", price: "Custom?", img: "custom-min.png", category: "custom", size: "custom" },
-
+      { name: "Meja Console 1000", price: "Rp 4.000.000", images: ["consoll1000-min.jpg"], category: "Terlaris", size: "120x35x75" },
+      { name: "Custom", price: "Custom?", images: ["custom-min.png"], category: "custom", size: "custom" },
     ];
-
     // ── UI ELEMENTS ───────────────────────────────────
     const grid = document.getElementById('produk-grid');
     const emptyMsg = document.getElementById('empty-msg');
@@ -862,6 +875,7 @@
     let currentFilter = 'semua';
     let currentSearch = '';
 
+    // ── RENDER LOGIC ──────────────────────────────────
     // ── RENDER LOGIC ──────────────────────────────────
     function renderProducts() {
       grid.innerHTML = '';
@@ -877,30 +891,30 @@
       } else {
         emptyMsg.classList.add('d-none');
         filtered.forEach((p, idx) => {
-          /** * FORMULA FOTO: img/${p.img}
-           * Ini akan menghasilkan: img/namafile.jpg
-           */
+          // Ambil foto pertama dari array images (atau fallback ke p.img jika format lama)
+          let firstImg = p.images && p.images.length > 0 ? p.images[0] : p.img;
+
           const card = `
-            <div class="col-6 col-md-4 col-lg-3 product-item" style="animation-delay: ${idx * 0.03}s">
-              <div class="product-card">
-                <div class="img-wrap">
-                  <span class="badge-cat bg-${p.category}">${p.category}</span>
-                  <img src="img/${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=File+Tidak+Ada'">
-                </div>
-                <div class="card-body-custom">
-                  <h5>${p.name}</h5>
-                  <div class="price-tag">${p.price}</div>
-                  <a href="javascript:void(0)" onclick="showDetailByIndex(${products.indexOf(p)})" class="btn-detail">Lihat Detail</a>
-                </div>
-              </div>
+        <div class="col-6 col-md-4 col-lg-3 product-item" style="animation-delay: ${idx * 0.03}s">
+          <div class="product-card">
+            <div class="img-wrap">
+              <span class="badge-cat bg-${p.category}">${p.category}</span>
+              <img src="img/${firstImg}" alt="${p.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=File+Tidak+Ada'">
             </div>
-          `;
+            <div class="card-body-custom">
+              <h5>${p.name}</h5>
+              <div class="price-tag">${p.price}</div>
+              <a href="javascript:void(0)" onclick="showDetailByIndex(${products.indexOf(p)})" class="btn-detail">Lihat Detail</a>
+            </div>
+          </div>
+        </div>
+      `;
           grid.innerHTML += card;
         });
       }
     }
 
-    // ── DETAIL MODAL ──────────────────────────────────
+    // ── DETAIL MODAL DENGAN SLIDER FOTO ─────────────────
     const modal = new bootstrap.Modal(document.getElementById('productModal'));
 
     function showDetailByIndex(index) {
@@ -909,17 +923,29 @@
 
       document.getElementById('modalTitle').innerText = p.name;
 
-      /** * FORMULA FOTO MODAL: img/${p.img}
-       */
-      document.getElementById('modalImg').src = "img/" + p.img;
+      // Render Carousel / Slider Foto di Modal
+      const carouselInner = document.getElementById('carouselImages');
+      carouselInner.innerHTML = '';
+
+      let imageList = p.images && p.images.length > 0 ? p.images : [p.img];
+
+      imageList.forEach((imgSrc, i) => {
+        const activeClass = i === 0 ? 'active' : '';
+        carouselInner.innerHTML += `
+      <div class="carousel-item ${activeClass}">
+        <img src="img/${imgSrc}" class="d-block w-100" style="object-fit: cover; height: 450px;" 
+             onerror="this.src='https://via.placeholder.com/600x800?text=Zahra+Metal+Furniture'">
+      </div>
+    `;
+      });
 
       const specList = document.getElementById('modalSpecs');
       specList.innerHTML = `
-        <li><span class="spec-label">Harga</span> <span>${p.price}</span></li>
-        <li><span class="spec-label">Ukuran</span> <span>${p.size || 'Custom'}</span></li>
-        <li><span class="spec-label">Material</span> <span>Stainless Steel Premium</span></li>
-        <li><span class="spec-label">Finishing</span> <span>Mirror / Hairline Gold</span></li>
-      `;
+    <li><span class="spec-label">Harga</span> <span>${p.price}</span></li>
+    <li><span class="spec-label">Ukuran</span> <span>${p.size || 'Custom'}</span></li>
+    <li><span class="spec-label">Material</span> <span>Stainless Steel Premium</span></li>
+    <li><span class="spec-label">Finishing</span> <span>Mirror / Hairline Gold</span></li>
+  `;
 
       const waMsg = encodeURIComponent(`Halo Zahra Metal Furniture, saya ingin bertanya tentang produk "${p.name}". Apakah stok tersedia?`);
       document.getElementById('btnOrder').href = `https://wa.me/6282342267208?text=${waMsg}`;
